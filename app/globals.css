@@ -1,0 +1,104 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply text-white antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    font-family: var(--font-montserrat), sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    background: #000000;
+    min-height: 100vh;
+  }
+  
+  h1 {
+    font-family: var(--font-cronde), "Cronde", serif;
+    font-size: 72px;
+    font-weight: 400;
+    font-style: normal;
+    letter-spacing: 0.1em;
+  }
+  
+  h2 {
+    font-family: var(--font-montserrat), sans-serif;
+    font-size: 48px;
+    font-weight: 600;
+    font-style: normal;
+  }
+  
+  :root {
+    --font-montserrat: 'Montserrat', sans-serif;
+    --font-jetbrains-mono: 'JetBrains Mono', monospace;
+    --font-anton: 'Anton', sans-serif;
+    --font-cronde: 'Cronde', serif;
+  }
+
+  /* Code/Authority font for labels and technical text */
+  .font-code {
+    font-family: var(--font-jetbrains-mono), monospace;
+  }
+}
+
+@layer components {
+  /* Glassmorphism card style */
+  .glass-card {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+  }
+
+  .glass-card-hover {
+    @apply glass-card;
+    transition: all 0.3s ease;
+  }
+
+  .glass-card-hover:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.15);
+  }
+}
+
+@keyframes scrollLeft {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-33.333%);
+  }
+}
+
+@keyframes scrollRight {
+  0% {
+    transform: translateX(-33.333%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes scrollUp {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-33.333%);
+  }
+}
+
+@keyframes scrollDown {
+  0% {
+    transform: translateY(-33.333%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
