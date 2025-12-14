@@ -33,13 +33,20 @@ function VideoBackground({
         loop
         muted
         playsInline
+        preload="metadata"
         style={{
           width: '100%',
           height: '100%',
           objectFit: 'cover',
         }}
+        aria-hidden="true"
+        onError={(e) => {
+          // Silently handle video load errors
+          console.warn('Video background failed to load')
+        }}
       >
-        <source src="/bg effect .mp4" type="video/mp4" />
+        <source src="/bg%20effect%20.mp4" type="video/mp4" />
+        {/* Fallback for browsers that don't support video */}
       </video>
       {/* Dark overlay with 50% opacity */}
       <div className="absolute top-0 left-0 w-full h-full bg-black opacity-50" />

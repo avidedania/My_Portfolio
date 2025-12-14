@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, AnimatePresence } from 'framer-motion'
-import { FiX, FiCheckCircle, FiSparkles } from 'react-icons/fi'
+import { FiX, FiCheckCircle, FiStar } from 'react-icons/fi'
 import { useEffect, useState } from 'react'
 
 interface SuccessModalProps {
@@ -51,10 +51,37 @@ export default function SuccessModal({ isOpen, onClose, userName }: SuccessModal
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden'
+      // Trap focus within modal
+      const focusableElements = document.querySelectorAll<HTMLElement>(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      )
+      const firstElement = focusableElements[0]
+      const lastElement = focusableElements[focusableElements.length - 1]
+      
+      const handleTabKey = (e: KeyboardEvent) => {
+        if (e.key !== 'Tab') return
+        
+        if (e.shiftKey) {
+          if (document.activeElement === firstElement) {
+            lastElement?.focus()
+            e.preventDefault()
+          }
+        } else {
+          if (document.activeElement === lastElement) {
+            firstElement?.focus()
+            e.preventDefault()
+          }
+        }
+      }
+      
+      document.addEventListener('keydown', handleTabKey)
+      firstElement?.focus()
+      
+      return () => {
+        document.body.style.overflow = 'unset'
+        document.removeEventListener('keydown', handleTabKey)
+      }
     } else {
-      document.body.style.overflow = 'unset'
-    }
-    return () => {
       document.body.style.overflow = 'unset'
     }
   }, [isOpen])
@@ -83,6 +110,9 @@ export default function SuccessModal({ isOpen, onClose, userName }: SuccessModal
               exit={{ opacity: 0, scale: 0.8, y: 20 }}
               transition={{ type: 'spring', damping: 25, stiffness: 300 }}
               className="relative w-full max-w-md pointer-events-auto"
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="modal-title"
             >
               {/* Glass card effect */}
               <div className="relative glass-card p-8 rounded-2xl border border-white/20 overflow-hidden">
@@ -105,8 +135,9 @@ export default function SuccessModal({ isOpen, onClose, userName }: SuccessModal
                   {/* Close button */}
                   <button
                     onClick={onClose}
-                    className="absolute top-4 right-4 p-2 glass-card hover:bg-white/10 rounded-lg transition-colors text-white/60 hover:text-white"
-                    aria-label="Close"
+                    className="absolute top-4 right-4 p-2 glass-card hover:bg-white/10 rounded-lg transition-colors text-white/60 hover:text-white focus:outline-none focus:ring-2 focus:ring-white/50"
+                    aria-label="Close modal"
+                    autoFocus
                   >
                     <FiX className="w-5 h-5" />
                   </button>
@@ -124,7 +155,7 @@ export default function SuccessModal({ isOpen, onClose, userName }: SuccessModal
                         transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
                         className="absolute inset-0"
                       >
-                        <FiSparkles className="w-16 h-16 text-white/20" />
+                        <FiStar className="w-16 h-16 text-white/20" />
                       </motion.div>
                       <FiCheckCircle className="w-16 h-16 text-green-400 relative z-10" />
                     </div>
@@ -132,6 +163,7 @@ export default function SuccessModal({ isOpen, onClose, userName }: SuccessModal
 
                   {/* Title */}
                   <motion.h2
+                    id="modal-title"
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.3 }}

@@ -23,11 +23,24 @@ git commit -m "Initial commit - Avi Dedania Portfolio"
 
 ### Step 3: Push to GitHub
 
-1. Create a new repository on GitHub (name it: `avi-dedania-portfolio` or `my-portfolio`)
-2. Link your local repository:
+1. Create a new repository on GitHub:
+   - **Username**: `avidedania`
+   - **Repository Name**: `My_Portfolio`
+   - URL will be: `https://github.com/avidedania/My_Portfolio.git`
 
-```bash
-git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git
+2. Fix the existing remote (if you got the error "remote origin already exists"):
+
+```powershell
+# Remove the old incorrect remote
+git remote remove origin
+
+# Add the correct remote
+git remote add origin https://github.com/avidedania/My_Portfolio.git
+
+# Verify it's set correctly
+git remote -v
+
+# Push to GitHub
 git branch -M main
 git push -u origin main
 ```
@@ -37,7 +50,8 @@ git push -u origin main
 1. Go to [vercel.com](https://vercel.com) and sign in
 2. Click "Add New..." → "Project"
 3. Import your GitHub repository
-4. **Project Name**: Set it to `Avi Dedania Portfolio`
+4. **Project Name**: Set it to `avi-dedania-portfolio` (must be lowercase, no spaces)
+   - Vercel project names must be lowercase and can only contain letters, digits, '.', '_', and '-'
 5. Framework Preset: Next.js (auto-detected)
 6. Root Directory: `./` (default)
 
@@ -55,6 +69,8 @@ Click "Deploy" and wait for the build to complete!
 
 Your portfolio will be live at: `https://avi-dedania-portfolio.vercel.app` (or your custom domain)
 
+**Note:** The display name in Vercel dashboard can still show "Avi Dedania Portfolio" for readability, but the actual project name/URL will be `avi-dedania-portfolio`.
+
 ---
 
 ## Quick Commands Reference
@@ -68,3 +84,4 @@ git add .
 git commit -m "Update project name and prepare for Vercel deployment"
 git push
 ```
+

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://avi-dedania-portfolio.vercel.app/sitemap.xml

@@ -117,8 +117,12 @@ export default function Home() {
 
   return (
     <main className="relative overflow-hidden">
+      {/* Skip to main content for accessibility */}
+      <a href="#main-content" className="skip-to-content">
+        Skip to main content
+      </a>
       {/* Content */}
-      <div className="relative z-10">
+      <div id="main-content" className="relative z-10">
         <Navbar />
         
         {/* Hero Section */}
@@ -346,27 +350,31 @@ export default function Home() {
                 <div className="glass-card p-6">
                   <h3 className="text-sm text-white/60 uppercase tracking-wider mb-4 font-code">Social</h3>
                   <div className="flex gap-4">
+                    {/* TODO: Update with actual social media URLs */}
                     <a
-                      href="https://linkedin.com"
+                      href="https://linkedin.com/in/avidedania"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="p-3 glass-card hover:bg-white/5 transition-colors"
+                      aria-label="LinkedIn profile"
                     >
                       <FiLinkedin className="w-5 h-5 text-white" />
                     </a>
                     <a
-                      href="https://github.com"
+                      href="https://github.com/avidedania"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="p-3 glass-card hover:bg-white/5 transition-colors"
+                      aria-label="GitHub profile"
                     >
                       <FiGithub className="w-5 h-5 text-white" />
                     </a>
                     <a
-                      href="https://reddit.com"
+                      href="https://reddit.com/user/avidedania"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="p-3 glass-card hover:bg-white/5 transition-colors"
+                      aria-label="Reddit profile"
                     >
                       <SiReddit className="w-5 h-5 text-white" />
                     </a>
@@ -452,6 +460,9 @@ export default function Home() {
 
                   {submitStatus.type && (
                     <div
+                      role="alert"
+                      aria-live={submitStatus.type === 'error' ? 'assertive' : 'polite'}
+                      aria-atomic="true"
                       className={`p-4 rounded-lg ${
                         submitStatus.type === 'success'
                           ? 'bg-green-500/20 text-green-400 border border-green-500/30'

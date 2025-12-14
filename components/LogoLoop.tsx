@@ -1,6 +1,7 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useState, useRef } from 'react'
+import Image from 'next/image'
 
 interface LogoItem {
   node?: React.ReactNode
@@ -109,10 +110,13 @@ export default function LogoLoop({
           {duplicatedLogos.map((logo, index) => {
             const content = logo.node || (
               logo.src ? (
-                <img
+                <Image
                   src={logo.src}
-                  alt={logo.alt || logo.title || ''}
+                  alt={logo.alt || logo.title || 'Logo'}
+                  width={logoHeight * 2}
+                  height={logoHeight}
                   style={{ height: '100%', width: 'auto', objectFit: 'contain' }}
+                  unoptimized={true}
                 />
               ) : null
             )
